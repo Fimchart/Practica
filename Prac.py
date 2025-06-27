@@ -1,34 +1,28 @@
-from funciones import menu
+from funciones import menu, ingresar_pokemon,buscar_pokemon,eliminar_pokemon,listar_pokemons
 
 pokemons = []
-tipos_validos = ["fuego","agua", "psiquico", "planta", "lucha", "veneno", "electrico", 
-                 "roca", "dragon", "bicho", "tierra", "volador", "hielo", "fantasma"]
 
 print("**** Bienvenido ****")
 while True:
     menu()
-    opcionI = int(input("Ingrese una opción: "))
+    try:
+        opcionI = int(input("Ingrese una opción: "))
+    except ValueError:
+        print(" Opción inválida. Debe ingresar un número.")
+        continue
+
     if opcionI == 1: 
-        nombrePokemon = input("Ingrese el nombre del pokemon: ").lower()
-        if nombrePokemon in pokemons:  
-            print("El pokemon ingresado ya esta registrado.")
-            continue
-        tipoPokemon = input("Ingese de que tipo es el pokemon: ").lower()
-        if tipoPokemon not in tipos_validos:
-            print("Tipo invalido.")
-            continue
-        pokemons.append({
-            "nombre": nombrePokemon,
-            "tipo": tipoPokemon})
+        ingresar_pokemon()
     elif opcionI == 2:
-        buscar_pokemon = input("Ingrese el nombre del pokemon a buscar: ").lower()
-        encontrado= False
-        for i in pokemons:
-            if i["nombre"] == buscar_pokemon:
-                print("***Pokemon encontrado***\n")
-                print(f"nombre: {i["nombre"]}")
-                print(f"tipo: {i["tipo"]}\n")
-                encontrado = True
-                break
-        if not encontrado:
-            print("\nNo se ha encontrado al pokemon.")
+        buscar_pokemon()
+    elif opcionI == 3:
+        eliminar_pokemon()
+    elif opcionI == 4:
+        listar_pokemons()
+    elif opcionI == 5:
+        print("¡Gracias por usar el sistema!")
+        print("**** Saliendo ****")
+        break
+    else:
+        print("Opción no valida.")
+        print("Por favor, seleccione una opción valida.")
